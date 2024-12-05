@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+<title>Student Performance Dashboard</title>
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .chart-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            width: 45%;
+        }
+
+        .chart-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+
+
+<header>
+    <h1>Student Performance Dashboard</h1>
+    <p>Track your performance in various subjects</p>
+</header>
+
+<section class="dashboard-container">
+
+    <!-- Bar Chart Container -->
+    <div class="chart-container">
+        <h3>Marks in Different Subjects</h3>
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <!-- Pie Chart Container -->
+    <div class="chart-container">
+        <h3>Performance Percentage</h3>
+        <canvas id="pieChart"></canvas>
+    </div>
+
+</section>
+
+<footer>
+    <p>&copy; 2024 Student Performance App. All rights reserved.</p>
+</footer>
+
+<script>
+    // Data for Bar Chart (Marks in Different Subjects)
+    const barChartData = {
+        labels: ['Mathematics', 'biology', 'social'],
+        datasets: [{
+            label: 'Marks Obtained',
+            data: [85, 92, 78], // Sample data for marks
+            backgroundColor: 'rgba(41, 128, 185, 0.6)',
+            borderColor: 'rgba(41, 128, 185, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    // Bar Chart Configuration
+    const barChartConfig = {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Marks'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Subjects'
+                    }
+                }
+            }
+        }
+    };
+
+    // Create Bar Chart
+    const barChartCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barChartCtx, barChartConfig);
+
+    // Data for Pie Chart (Percentage Distribution)
+    const pieChartData = {
+        labels: ['Mathematics', 'biology', 'social'],
+        datasets: [{
+            label: 'Percentage Distribution',
+            data: [85, 92, 78], // Percentage data corresponding to the marks
+            backgroundColor: [
+                'rgba(41, 128, 185, 0.6)',
+                'rgba(155, 89, 182, 0.6)',
+                'rgba(39, 174, 96, 0.6)'
+            ],
+            borderColor: [
+                'rgba(41, 128, 185, 1)',
+                'rgba(155, 89, 182, 1)',
+                'rgba(39, 174, 96, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    // Pie Chart Configuration
+    const pieChartConfig = {
+        type: 'pie',
+        data: pieChartData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    // Create Pie Chart
+    const pieChartCtx = document.getElementById('pieChart').getContext('2d');
+    new Chart(pieChartCtx, pieChartConfig);
+</script>
+
+{% endblock %}

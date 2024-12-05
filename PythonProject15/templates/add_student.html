@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Add students details{% endblock %}
+
+{% block content %}
+
+    <h2>Student Information Form</h2>
+    <form action="/submit" method="POST">
+
+        <label for="id"> ID:</label>
+        <input type="number" id="id" name="id" placeholder="Enter ID" min="0" required>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter name" required>
+
+        <label for="maths">maths:</label>
+        <input type="number" id="maths" name="maths" placeholder="Enter maths marks" required>
+
+        <label for="biology">biology:</label>
+        <input type="number" id="biology" name="biology" placeholder="Enter biology marks" min="0" required>
+
+        <label for="social">social:</label>
+        <input type="number" id="social" name="social" placeholder="Enter social marks" min="0" required>
+
+        <label for="percentage">percentage:</label>
+        <input type="number" id="percentage" name="percentage" placeholder="Enter perentage" min="0" required>
+
+        <button type="submit">Submit</button>
+    </form>
+
+{% endblock %}
