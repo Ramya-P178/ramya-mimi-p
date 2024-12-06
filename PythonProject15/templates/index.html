@@ -5,7 +5,7 @@
 {% block content %}
 
     <style>
-        body {
+        body {A
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -60,6 +60,8 @@
                     <th>biology</th>
                     <th>social</th>
                     <th>percentage</th>
+                    <th>edit</th>
+                    <th>delete</th>
 
                 </tr>
             </thead>
@@ -74,7 +76,16 @@
                 <td>{{student.biology}}</td>
                 <td>{{student.social}}</td>
                 <td>{{student.percentage}}</td>
-                <td><button onclick="confirmDelete({{student.id}})">delete</button></td>
+                <td><button onclick="confirmDelete({{student.id}})" style="display: inline-block;
+                 padding: 10px; border: none; border-radius: 5px; background-color: #007BFF;
+                 color: white; font-size: 14px; cursor: pointer; text-decoration: none;
+                 text-align: center; transition: background-color 0.3s ease;">delete</button></td>
+                <td><a href="/update/{{student.id}}" style="margin: 0em;padding-block: 1px;
+                padding-inline: 6px;letter-spacing: normal;word-spacing: normal;line-height: normal;
+                text-transform: none;text-indent: 0px;text-shadow: none;display: inline-block;
+                padding:10px; border: none; border-radius: 5px; background-color: #007BFF;
+                color: white; font-size: 14px; cursor: pointer; text-decoration: none;
+                text-align: center; transition: background-color 0.3s ease;">Update</a>
 
             </tr>
         {% endfor %}

@@ -74,5 +74,30 @@ def delete(id):
         return jsonify({'message': 'An error occurred while deleting the data {}'.format(e)}), 500
 
 
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    student = Student.query.get_or_404(id)
+    print(student.id)
+    if not student:
+        return jsonify({'message': 'student not found'}), 404
+
+    if request.method == 'POST':
+        student.id = request.form['id']
+        student.name = request.form['name']
+        student.maths = request.form['maths']
+        student.biology = request.form['biology']
+        student.social = request.form['social']
+        student.percentage = request.form['percentage']
+
+        try:
+            db.session.commit()
+            return redirect('/')
+
+        except Exception as e:
+            db.session.rollback()
+            return "there is an issue while updating the record"
+    return render_template('update.html', student=student)
+
+
 if __name__ =='__main__':
     app.run(host='127.0.0.1',port=5003,debug=True)
